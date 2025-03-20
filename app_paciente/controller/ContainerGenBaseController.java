@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import app_paciente.model.Paciente;
 import app_paciente.view.CalendarView;
 import app_paciente.view.ChatView;
+import app_paciente.view.ConfiguracionesView;
 import app_paciente.view.ContainerGenBaseView;
 import app_paciente.view.HistorialMedicoView;
 import app_paciente.view.MedicamentosView;
@@ -54,6 +55,9 @@ public class ContainerGenBaseController implements ActionListener {
         }
         else if(comando.equals("agenda")){
             cambiarPanel(new CalendarView());
+        }
+        else if(comando.equals("configuracion")){
+            cambiarPanel(new ConfiguracionesView());
         }
     }
 }

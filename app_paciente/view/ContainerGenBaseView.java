@@ -69,6 +69,7 @@ public class ContainerGenBaseView extends JPanel {
         recomendaciones.setActionCommand("recomendaciones");
         agenda.setActionCommand("agenda");
         chat.setActionCommand("chat");
+        configuracion.setActionCommand("configuracion");
 
         // Aplicar estilos
         EstilosUI.panelApp_Bar(app_Bar);
