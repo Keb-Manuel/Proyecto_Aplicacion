@@ -1,10 +1,5 @@
 package app_paciente.view;
 
-import javax.swing.*;
-
-import Style.Boton;
-import Style.EstilosUI;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +9,14 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import Style.Boton;
+import Style.EstilosUI;
 
 public class ContainerGenBaseView extends JPanel {
     private JPanel app_Bar;
@@ -61,8 +64,7 @@ public class ContainerGenBaseView extends JPanel {
         label_Logo = new JLabel(new ImageIcon(enviar_escalado));
         logo_container.add(label_Logo, BorderLayout.CENTER);
 
-
-        //Botones
+        // Botones
         perfil.setActionCommand("perfil");
         hist_Medico.setActionCommand("hist_medico");
         medicamentos.setActionCommand("medicamentos");
@@ -170,15 +172,15 @@ public class ContainerGenBaseView extends JPanel {
         revalidate();
     }
 
-    public JButton[] getBotones(){
-        return new JButton[]{perfil, hist_Medico, medicamentos, recomendaciones, agenda, chat, configuracion};
+    public JButton[] getBotones() {
+        return new JButton[] { perfil, hist_Medico, medicamentos, recomendaciones, agenda, chat, configuracion };
     }
 
     public JPanel getPanelCentral() {
         return panel_Central;
     }
 
-    public void setPanelCentral(JPanel panel){
+    public void setPanelCentral(JPanel panel) {
         panel_Central.removeAll();
         panel_Central.add(panel);
         panel_Central.revalidate();

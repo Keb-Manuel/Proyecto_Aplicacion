@@ -1,38 +1,99 @@
 package app_paciente.view;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import java.awt.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+
+import Style.EstilosUI;
 
 public class CalendarView extends JPanel {
     private JTable calendarTable;
-    private DefaultTableModel calendarModel;
     private JButton btnSolicitar;
+    private JButton btnCancelar;
+    private JButton btnReprogramar;
+    private JPanel sidePanel;
+    private JTextArea infoArea;
+    private JList<String> listaDiasDisponibles;
+    private DefaultListModel<String> listModel;
 
     public CalendarView() {
-        init();
-    }
+        this.setLayout(new BorderLayout());
+        this.listModel = new DefaultListModel<>();
+        this.listaDiasDisponibles = new JList<>(listModel);
+        this.infoArea = new JTextArea();
+        this.infoArea.setEditable(false);
 
-    private void init() {
-        setLayout(new BorderLayout());
-
-        String[] columnNames = { "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom" };
-        calendarModel = new DefaultTableModel(null, columnNames);
-        calendarTable = new JTable(calendarModel);
-
-        JScrollPane calendarScroll = new JScrollPane(calendarTable);
-        add(calendarScroll, BorderLayout.CENTER);
+        // Inicializar la tabla del calendario
+        this.calendarTable = new JTable();
+        JScrollPane scrollPane = new JScrollPane(calendarTable); // Asignar la tabla al JScrollPane
+        scrollPane.setOpaque(false);
 
         btnSolicitar = new JButton("Solicitar cita");
-        add(btnSolicitar, BorderLayout.SOUTH);
+        btnCancelar = new JButton("Cancelar");
+        btnReprogramar = new JButton("Reprogramar");
+
+        sidePanel = new JPanel(new BorderLayout());
+        sidePanel.setPreferredSize(new Dimension(250, 150));
+
+        JPanel panelFechas = new JPanel(new BorderLayout());
+        panelFechas.add(new JLabel("Fechas disponibles"), BorderLayout.NORTH);
+        panelFechas.add(new JScrollPane(listaDiasDisponibles), BorderLayout.CENTER);
+
+        sidePanel.add(new JScrollPane(infoArea), BorderLayout.CENTER);
+        sidePanel.add(panelFechas, BorderLayout.NORTH);
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.add(btnCancelar);
+        panelBotones.add(btnReprogramar);
+        sidePanel.add(panelBotones, BorderLayout.SOUTH);
+
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
+        panelPrincipal.add(scrollPane, BorderLayout.CENTER);
+        panelPrincipal.add(btnSolicitar, BorderLayout.SOUTH);
+
+        this.add(panelPrincipal, BorderLayout.CENTER);
+        this.add(sidePanel, BorderLayout.EAST);
+
+        EstilosUI.aplicarEstiloPanelPrincipal(sidePanel);
+        EstilosUI.aplicarEstiloPanelPrincipal(panelPrincipal);
+        // EstilosUI.aplicarBotonGeneral(btnCancelar);
+        // EstilosUI.aplicarBotonGeneral(btnReprogramar);
+        // EstilosUI.aplicarBotonGeneral(btnSolicitar);
+    }
+
+    public JTable getCalendarTable() {
+        return calendarTable;
     }
 
     public JButton getBtnSolicitar() {
         return btnSolicitar;
     }
 
-    public void agregarDia(int dia) {
-        calendarModel.addRow(new Object[] { dia });
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnReprogramar() {
+        return btnReprogramar;
+    }
+
+    public JTextArea getInfoArea() {
+        return infoArea;
+    }
+
+    public JList<String> getListaDiasDisponibles() {
+        return listaDiasDisponibles;
+    }
+
+    public DefaultListModel<String> getListModel() {
+        return listModel;
     }
 }

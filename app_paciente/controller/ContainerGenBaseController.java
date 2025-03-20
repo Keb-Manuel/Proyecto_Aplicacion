@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import app_paciente.model.CalendarModel;
 import app_paciente.model.Paciente;
 import app_paciente.view.CalendarView;
 import app_paciente.view.ChatView;
@@ -34,29 +35,27 @@ public class ContainerGenBaseController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-        if(comando.equals("chat")){
+        if (comando.equals("chat")) {
             cambiarPanel(new ChatView());
-        }
-        else if(comando.equals("perfil")){
-             // Crear el modelo y la vista del perfil
+        } else if (comando.equals("perfil")) {
+            // Crear el modelo y la vista del perfil
             Paciente paciente = new Paciente();
             PerfilPacienteView perfilView = new PerfilPacienteView();
             new PerfilPacienteController(perfilView, paciente); // Conectar controlador
             cambiarPanel(perfilView); // Cambiar al panel del perfil
-        }
-        else if(comando.equals("hist_medico")){
+        } else if (comando.equals("hist_medico")) {
             cambiarPanel(new HistorialMedicoView());
-        }
-        else if(comando.equals("medicamentos")){
+        } else if (comando.equals("medicamentos")) {
             cambiarPanel(new MedicamentosView());
-        }
-        else if(comando.equals("recomendaciones")){
+        } else if (comando.equals("recomendaciones")) {
             cambiarPanel(new RecomendacionesView());
-        }
-        else if(comando.equals("agenda")){
-            cambiarPanel(new CalendarView());
-        }
-        else if(comando.equals("configuracion")){
+        } else if (comando.equals("agenda")) {
+            CalendarModel model = new CalendarModel();
+            CalendarView calendarView = new CalendarView();
+            new CalendarController(model, calendarView); // Conectar controlador
+            cambiarPanel(calendarView); // Cambiar al panel del calendario
+
+        } else if (comando.equals("configuracion")) {
             cambiarPanel(new ConfiguracionesView());
         }
     }
