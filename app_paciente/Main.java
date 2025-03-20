@@ -1,5 +1,4 @@
 package app_paciente;
-
 import javax.swing.*;
 
 import app_paciente.controller.InicioSesionController;
